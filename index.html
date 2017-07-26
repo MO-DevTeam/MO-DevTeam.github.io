@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="878490171690-dbc9jpvj9hh08udv79ae9cl7j2o6dhjs.apps.googleusercontent.com">
+    <title>Feedweb</title>
+
+    <script src="bootstrap/js/jq.js"></script>
+    <script src="angular/libraries/angular.min.js"></script>
+    <script src="angular/libraries/ui-router.js"></script>
+    <script src="angular/libraries/aes.js"></script>
+    <script src="angular/main.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="angular/controllers/homeController.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/font-awesome.css">
+
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link href="main.css" rel="stylesheet">
+</head>
+<body ng-app="myApp">
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" style="color: rgba(255,255,255,0.75); font-size: x-large; display: flex">
+                <span style="color: #9d9d9d">Feed</span><span style="color: #204d74">web</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div>
+<div class="container container2" ui-view>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+.container2 {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.auth {
+    display: flex;
+    box-shadow: 0 2px 4px rgba(10, 10, 10, 0.4);
+    background: #fefefe;
+    border-radius: 0;
+    overflow: hidden;
+    padding: 2%;
+}
+
+.input-group {
+    margin: 4% 0 2% 0;
+}
+
+.nav-auth {
+    width: 50%;
+    padding-right: 2%;
+}
+
+.social {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

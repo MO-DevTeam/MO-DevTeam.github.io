@@ -1,0 +1,3 @@
+clientID - 878490171690-dbc9jpvj9hh08udv79ae9cl7j2o6dhjs.apps.googleusercontent.com
+
+client secret - za4YzDQP2ZsHLH6MkY_RFNJh

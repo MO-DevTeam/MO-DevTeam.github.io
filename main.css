@@ -31,19 +31,18 @@
     background: #fefefe;
     border-radius: 0;
     overflow: hidden;
-    padding: 2%;
 }
     /* navigation */
 .nav-auth {
     width: 50%;
-    padding-right: 2%;
+    padding: 2%;
 }
 #logIn,#signUp:hover{
     cursor: pointer;
 }
 
     /* input fields */
-.input-group {
+.form-group {
     margin: 4% 0 2% 0;
 }
     /* social media account login */
@@ -53,5 +52,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-image: url("images/social.jpeg");
 }
 

@@ -7,9 +7,11 @@ var homeController = function ($scope, $state, $http) {
     // switching between signUp and logIn forms
     $scope.toggle = true;
     $scope.changeForm = function() {
-        $scope.toggle = $scope.toggle === false ? true: false;
+        $scope.toggle = $scope.toggle === false;
     };
-
+    $scope.unableSignup = false;
+    $scope.dupUsername = false;
+    $scope.invalidLogin = false;
 
 };
 

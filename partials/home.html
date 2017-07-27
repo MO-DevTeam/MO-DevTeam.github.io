@@ -1,23 +1,32 @@
-<div>
+<!-- Home Page -->
+
+<!-- App description -->
+<div id="description">
     Hello
     Sup the whack playstation, sup?
 </div>
-<div>
+
+<!-- Authentication fields -->
+<div ng-controller="homeController">
+
     <div class="auth">
         <div class="nav-auth" role="navigation">
+            <!-- navigation -->
             <ul class="nav nav-tabs">
-                <li role="presentation" id="logIn" class="active"><a role="tab" data-toggle="tab">LOG IN</a></li>
-                <li role="presentation" id="signUp"><a role="tab" data-toggle="tab">SIGN UP</a></li>
+                <li role="presentation" id="logIn" class="active"><a ng-click='changeForm()' role="tab" data-toggle="tab">LOG IN</a></li>
+                <li role="presentation" id="signUp"><a ng-click='changeForm()' role="tab" data-toggle="tab">SIGN UP</a></li>
             </ul>
+            <!-- forms -->
             <div class="form">
-                <div id="loginForm" ng-show="true">
+                <!-- login form -->
+                <div id="loginForm" ng-show="toggle">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
                         <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
-                        <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+                        <input type="password" class="form-control" placeholder="Password" aria-desscribedby="basic-addon1">
                     </div>
                     <div class="text-center">
                         <button type="button" style="margin-top: 2%" class="btn btn-primary">
@@ -25,7 +34,8 @@
                         </button>
                     </div>
                 </div>
-                <div id="signupForm" ng-show="showSignup">
+                <!-- sign up form -->
+                <div id="signupForm" ng-hide="toggle">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
                         <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1">
@@ -40,7 +50,7 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
-                        <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1">
+                        <input type="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
                     </div>
                     <div class="text-center">
                         <button type="button" style="margin-top: 2%" class="btn btn-primary">
@@ -50,11 +60,13 @@
                 </div>
             </div>
         </div>
+
+        <!-- log in with social media account -->
         <div class="social">
             <div>Login with your social account</div>
-            <div class="g-signin2" data-onsuccess="onSignIn"
-                 -theme="light" data-width="300" data-height="50"
-                 data-longtitle="true">button</div>
+
+            <!-- google sign in -->
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>
     </div>
 

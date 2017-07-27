@@ -2,11 +2,13 @@
  * Created by mahim on 25-07-2017.
  */
 
-var app = angular.module('myApp', ['ui.router']);
 
-app.config(function ($stateProvider, $urlRouterProvider) {
+
+angular.module('myApp', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
+
     $urlRouterProvider.otherwise('/home');
 
+    // states router
     $stateProvider.
         state('home', {
             url: '/home',

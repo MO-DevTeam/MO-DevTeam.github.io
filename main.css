@@ -1,3 +1,15 @@
+
+
+/* navbar*/
+.navbar-brand{
+    color: rgba(255,255,255,0.75);
+    font-size: x-large;
+    display: flex
+}
+
+
+
+/* main container view */
 .container2 {
     display: flex !important;
     flex-direction: column;
@@ -5,6 +17,14 @@
     align-items: center !important;
 }
 
+
+/* App description*/
+#description{
+    margin: 1% 0 2% 0;
+}
+
+
+/* Authentication */
 .auth {
     display: flex;
     box-shadow: 0 2px 4px rgba(10, 10, 10, 0.4);
@@ -13,16 +33,20 @@
     overflow: hidden;
     padding: 2%;
 }
-
-.input-group {
-    margin: 4% 0 2% 0;
-}
-
+    /* navigation */
 .nav-auth {
     width: 50%;
     padding-right: 2%;
 }
+#logIn,#signUp:hover{
+    cursor: pointer;
+}
 
+    /* input fields */
+.input-group {
+    margin: 4% 0 2% 0;
+}
+    /* social media account login */
 .social {
     width: 50%;
     display: flex;
@@ -30,3 +54,4 @@
     align-items: center;
     flex-direction: column;
 }
+

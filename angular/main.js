@@ -14,5 +14,13 @@ angular.module('myApp', ['ui.router']).config(function ($stateProvider, $urlRout
             url: '/home',
             templateUrl: 'partials/home.html',
             controller: 'homeController'
-    })
+    }).
+        state('feeds', {
+            url: '/feeds',
+            templateUrl: 'partials/feeds.html',
+            controller: 'feedsController'
+    });
+
+
+
 });

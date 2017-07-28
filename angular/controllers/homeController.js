@@ -13,6 +13,8 @@ var homeController = function ($scope, $state, $http) {
     $scope.dupUsername = false;
     $scope.invalidLogin = false;
 
+
+
 };
 
 angular.module('myApp').controller('homeController', homeController);

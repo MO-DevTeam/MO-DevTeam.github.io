@@ -19,21 +19,6 @@
             <!-- forms -->
             <div class="form">
                 <!-- login form -->
-                <!--<form name="loginForm" ng-show="toggle">-->
-                    <!--<div class="input-group">-->
-                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>-->
-                        <!--<input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" required>-->
-                    <!--</div>-->
-                    <!--<div class="input-group">-->
-                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>-->
-                        <!--<input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" required>-->
-                    <!--</div>-->
-                    <!--<div class="text-center">-->
-                        <!--<button type="button" style="margin-top: 2%" class="btn btn-primary">-->
-                            <!--LOG IN-->
-                        <!--</button>-->
-                    <!--</div>-->
-                <!--</form>-->
                 <form ng-show="toggle" name="loginForm">
                     <span class="text-danger text-center form-group" ng-show="invalidLogin">Username or Password may be invalid</span>
                     <div class="form-group">
@@ -49,29 +34,6 @@
                     </div>
                 </form>
                 <!-- sign up form -->
-                <!--<form id="signupForm" ng-hide="toggle">-->
-                    <!--<div class="input-group">-->
-                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>-->
-                        <!--<input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1" required>-->
-                    <!--</div>-->
-                    <!--<div class="input-group">-->
-                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>-->
-                        <!--<input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" required>-->
-                    <!--</div>-->
-                    <!--<div class="input-group">-->
-                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>-->
-                        <!--<input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" required>-->
-                    <!--</div>-->
-                    <!--<div class="input-group">-->
-                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>-->
-                        <!--<input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" placeholder="Email" aria-describedby="basic-addon1" required>-->
-                    <!--</div>-->
-                    <!--<div class="text-center form-group">-->
-                        <!--<button type="button" style="margin-top: 2%" class="btn btn-primary">-->
-                            <!--SIGN UP-->
-                        <!--</button>-->
-                    <!--</div>-->
-                <!--</form>-->
                 <form ng-hide="toggle" name="signupForm">
                     <span class="text-danger text-center form-group" ng-show="unableSignup">Unable to Sign Up. Please try again.</span>
                     <div class="form-group">

@@ -18,41 +18,51 @@
             </ul>
             <!-- forms -->
             <div class="form">
+
                 <!-- login form -->
                 <form ng-show="toggle" name="loginForm">
                     <span class="text-danger text-center form-group" ng-show="invalidLogin">Username or Password may be invalid</span>
+                    <!-- username -->
                     <div class="form-group">
                         <input class="form-control" name="username" type="text" ng-model="username" placeholder="Username" required>
                         <span class="text-danger" ng-show="loginForm.username.$invalid && loginForm.username.$touched">This is required</span>
                     </div>
+                    <!-- password -->
                     <div class="form-group">
                         <input class="form-control" name="password" type="password" ng-model="password" placeholder="Password" required>
                         <span class="text-danger" ng-show="loginForm.password.$invalid && loginForm.password.$touched">This is required</span>
                     </div>
+                    <!-- login button -->
                     <div class="form-group text-center">
-                        <button class="btn btn-primary" ng-click="loginButton()">LOG IN</button>
+                        <button class="btn btn-primary" ng-click="loginButton()" ui-sref="feeds">LOG IN</button>
                     </div>
                 </form>
+
                 <!-- sign up form -->
                 <form ng-hide="toggle" name="signupForm">
                     <span class="text-danger text-center form-group" ng-show="unableSignup">Unable to Sign Up. Please try again.</span>
+                    <!-- username -->
                     <div class="form-group">
                         <input class="form-control" name="username" type="text" ng-model="username" placeholder="Username" required>
                         <span class="text-danger" ng-show="signupForm.username.$invalid && signupForm.username.$touched">This is required</span>
                         <span class="text-danger" ng-show="dupUsername">Username already in use</span>
                     </div>
+                    <!-- password -->
                     <div class="form-group">
                         <input class="form-control" name="password" type="password" ng-model="password" placeholder="Password" required>
                         <span class="text-danger" ng-show="(password.length < 5 || password.length > 15 || signupForm.password.$invalid) && signupForm.password.$touched">Password must be between 5 and 15 characters</span>
                     </div>
+                    <!-- name -->
                     <div class="form-group">
                         <input class="form-control" name="name" type="text" ng-model="name" placeholder="Name" required>
                         <span class="text-danger" ng-show="signupForm.name.$invalid && signupForm.name.$touched">This is required</span>
                     </div>
+                    <!-- email -->
                     <div class="form-group">
                         <input class="form-control" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ng-model="email" placeholder="Email" required>
                         <span class="text-danger" ng-show="signupForm.email.$invalid && signupForm.email.$touched">Should be like example@ex.com</span>
                     </div>
+                    <!-- sign up button -->
                     <div class="form-group text-center">
                         <button class="btn btn-primary" ng-click="signupButton()">SIGN UP</button>
                     </div>
@@ -62,7 +72,7 @@
 
         <!-- log in with social media account -->
         <div class="social">
-            <div style="padding: 5%; font-size: 30px; color: white;" class="text-center">Login with your social account</div>
+            <div  style="padding: 5%; font-size: 30px; color: white;" class="text-center socialDescription">Login with your social account</div>
 
             <!-- google sign in -->
             <div class="g-signin2" style="margin: 10%" data-onsuccess="onSignIn"></div>

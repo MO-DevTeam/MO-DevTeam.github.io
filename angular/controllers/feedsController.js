@@ -4,21 +4,30 @@
 
 var feedsController = function ($scope, $state, $http) {
 
+    // tags
     $scope.tags = ['General', 'Technology', 'Sports'];
 
-    $scope.feeds = ["abc", "bca", "cba"];
-    $scope.tagRefine = [];
-    $scope.searchTag = "";
+    // feeda
+    $scope.feeds = ["abc"];
 
-    $scope.search = function () {
-        $scope.tagRefine  = [];
-        for (var i=0; i<3; i++){
-            if($scope.tags[i].indexOf($scope.searchTag) !== -1){
-                console.log($scope.searchTag);
-                $scope.tagRefine.push($scope.tags[i]);
-            }
-        }
-        console.log($scope.tagRefine)
+    // tags for search
+    $scope.tagRefine = ['General', 'Technology', 'Sports'];
+    // added tags
+    $scope.addedTags = [];
+
+    // add Tag
+    $scope.addTag = function (tag) {
+
+        $scope.addedTags.push(tag);
+        $scope.tagRefine.splice($scope.tagRefine.indexOf(tag), 1);
+        document.getElementById("tagInput").value = "";
+        $scope.searchTag = "";
+    };
+
+    // remove Tag
+    $scope.removeTag = function (tag) {
+        $scope.tagRefine.push(tag);
+        $scope.addedTags.splice($scope.addedTags.indexOf(tag), 1);
     }
 
 };

@@ -1,28 +1,35 @@
+<!-- Feeds page -->
+
+<!-- side nav -->
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a ng-repeat="x in tags" ui-sref="tags({ id: '{{x}}'})">{{x}}</a>
 </div>
 
+<!-- content area -->
 <div id="main">
+    <!-- open side nav -->
     <span id="open" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Tags</span>
+
+    <!-- feeds -->
     <div class="col s12 m7" ng-repeat="x in feeds">
 
-        <div >
-            <div >
-                <div >
+        <div>
+            <div>
+                <div>
                     <p>I am a very simple card. I am good at containing small bits of information.</p>
                 </div>
                 <div class="dropdown">
                     <div class="input-group dropdown-toggle" data-toggle="dropdown">
-                        <input class="form-control" type="text" ng-model="searchTag" ng-keyup="search()">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
+                        <div class="input-group-addon" ng-repeat="k in addedTags">
+                            <span>{{k}}</span>
+                            <span class="glyphicon glyphicon-remove" ng-click="removeTag(k)"></span>
                         </div>
+
+                        <input id="tagInput" class="form-control" type="text" ng-model="searchTag">
                     </div>
-                    <ul class="dropdown-menu" ng-show="tagRefine.length">
-                        <li ng-repeat="n in tagRefine">{{n}}</li>
+                    <ul class="dropdown-menu" ng-show="searchTag.length">
+                        <li ng-repeat="n in tagRefine | filter: searchTag"><a ng-click="addTag(n)">{{n}}</a></li>
                     </ul>
                 </div>
                 <div>
@@ -34,6 +41,8 @@
 
 </div>
 
+
+<!-- open and close side nav -->
 <script>
     var openNav = function () {
         document.getElementById("mySidenav").style.width = "250px";
@@ -48,20 +57,5 @@
         $('#open').css('opacity','1');
         $('#open').css('cursor','pointer');
     }
-
-//    $('.chips').material_chip();
-//
-//
-//    $('.chips-autocomplete').material_chip({
-//        autocompleteOptions: {
-//            data: {
-//                'Apple': null,
-//                'Microsoft': null,
-//                'Google': null
-//            },
-//            limit: Infinity,
-//            minLength: 1
-//        }
-//    });
 
 </script>

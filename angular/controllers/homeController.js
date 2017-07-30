@@ -29,12 +29,10 @@ var homeController = function ($scope, $state, $http) {
     $scope.dupUsername = false;
     $scope.invalidLogin = false;
 
-    $scope.onSignIn = function (googleUser) {
-        $state.go('feeds');
-        console.log("yo");
-    };
+
 
     $scope.g = function () {
+        $state.go('feeds');
         console.log("hi");
     }
 

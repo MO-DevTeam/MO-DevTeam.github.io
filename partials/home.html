@@ -74,8 +74,15 @@
             <div  style="padding: 5%; font-size: 30px; color: white;" class="text-center socialDescription">Login with your social account</div>
 
             <!-- google sign in -->
-            <div class="g-signin2" style="margin: 10%" data-onsuccess="onSignIn()" ng-click="g()"></div>
+            <div class="g-signin2" style="margin: 10%" data-onsuccess="onSignIn" ng-click="g()"></div>
         </div>
     </div>
 
 </div>
+
+<script>
+    function onSignIn(googleUser) {
+        $state.go('feeds');
+        console.log("yo");
+    }
+</script>

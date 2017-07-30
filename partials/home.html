@@ -74,13 +74,14 @@
             <div  style="padding: 5%; font-size: 30px; color: white;" class="text-center socialDescription">Login with your social account</div>
 
             <!-- google sign in -->
-            <button class="btn btn-default" style="margin: 10%" onclick="signIn()">Sign In</button>
+            <button class="btn btn-default" id="gSignInBtn" style="margin: 10%" onclick="signIn()">Sign In</button>
         </div>
     </div>
 
 </div>
 
 <script>
+
     gapi.load('auth2', function () {
         gapi.auth2.init();
     });
@@ -89,11 +90,18 @@
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signIn().then(function () {
             console.log('User signed in.');
+            document.getElementById('gSignInBtn').innerHTML = 'Sign Out';
+            document.getElementById('gSignInBtn').onclick = signOut();
         });
     }
 
-    var onSignIn = function (googleUser) {
-        $state.go('feeds');
-        console.log("yo");
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+            document.getElementById('gSignInBtn').innerHTML = 'Sign In';
+            document.getElementById('gSignInBtn').onclick = signIn();
+        });
     }
+
 </script>

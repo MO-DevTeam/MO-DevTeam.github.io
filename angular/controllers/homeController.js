@@ -60,7 +60,7 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
             var loginData = {
                 "password": $scope.password
             };
-            var loginUrl = "http://localhost:3000/api/users/" + $scope.username;
+            var loginUrl = "https://localhost:3000/api/users/" + $scope.username;
             $http({
                 method: 'POST',
                 url: loginUrl,
@@ -107,7 +107,7 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
                 "email": $scope.email,
                 "name": $scope.name
             };
-            var signupUrl = "http://localhost:3000/api/users";
+            var signupUrl = "https://localhost:3000/api/users";
             $http({
                 method: 'POST',
                 url: signupUrl,

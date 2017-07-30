@@ -31,6 +31,11 @@ var homeController = function ($scope, $state, $http) {
 
     $scope.onSignIn = function (googleUser) {
         $state.go('feeds');
+        console.log("yo");
+    };
+
+    $scope.g = function () {
+        console.log("hi");
     }
 
 };

@@ -1,107 +1,113 @@
 <!-- Home Page -->
 
-<!-- App description -->
-<div id="description" class="text-left">
-    <h2>Welcome to the <strong>Web</strong> of <strong>Feeds</strong></h2>
+<!-- side nav -->
+<div id="mySidenav" class="sidenav">
+    <a class="closebtn" ng-click="closeNav()">&times;</a>
+
 </div>
 
-<!-- Authentication fields -->
-<div ng-controller="homeController" style="width: 100%">
+<div id="main">
+    <!-- open side nav -->
+    <span id="open" style="font-size:30px;cursor:pointer" ng-click="openNav()" ng-show="switch">&#9776;</span>
 
-    <div class="auth">
-        <div class="nav-auth" role="navigation">
-            <!-- navigation -->
-            <ul class="nav nav-tabs">
-                <li role="presentation" id="logIn" class="active"><a ng-click='changeForm()' role="tab" data-toggle="tab">LOG IN</a></li>
-                <li role="presentation" id="signUp"><a ng-click='changeForm()' role="tab" data-toggle="tab">SIGN UP</a></li>
-            </ul>
-            <!-- forms -->
-            <div class="form">
+    <!-- App description -->
+    <div id="description" class="text-left">
+        Welcome to the <strong>Web</strong> of <strong>Feeds</strong>
+    </div>
 
-                <!-- login form -->
-                <form ng-show="toggle" name="loginForm">
-                    <span class="text-danger text-center form-group" ng-show="invalidLogin">Username or Password may be invalid</span>
-                    <!-- username -->
-                    <div class="form-group">
-                        <input class="form-control" name="username" type="text" ng-model="username" placeholder="Username" required>
-                        <span class="text-danger" ng-show="loginForm.username.$invalid && loginForm.username.$touched">This is required</span>
-                    </div>
-                    <!-- password -->
-                    <div class="form-group">
-                        <input class="form-control" name="password" type="password" ng-model="password" placeholder="Password" required>
-                        <span class="text-danger" ng-show="loginForm.password.$invalid && loginForm.password.$touched">This is required</span>
-                    </div>
-                    <!-- login button -->
-                    <div class="form-group text-center">
-                        <button class="btn btn-primary" ng-click="loginButton()" ui-sref="feeds">LOG IN</button>
-                    </div>
-                </form>
+    <!-- Authentication fields -->
+    <div style="width: 100%" ng-hide="switch">
 
-                <!-- sign up form -->
-                <form ng-hide="toggle" name="signupForm">
-                    <span class="text-danger text-center form-group" ng-show="unableSignup">Unable to Sign Up. Please try again.</span>
-                    <!-- username -->
-                    <div class="form-group">
-                        <input class="form-control" name="username" type="text" ng-model="username" placeholder="Username" required>
-                        <span class="text-danger" ng-show="signupForm.username.$invalid && signupForm.username.$touched">This is required</span>
-                        <span class="text-danger" ng-show="dupUsername">Username already in use</span>
-                    </div>
-                    <!-- password -->
-                    <div class="form-group">
-                        <input class="form-control" name="password" type="password" ng-model="password" placeholder="Password" required>
-                        <span class="text-danger" ng-show="(password.length < 5 || password.length > 15 || signupForm.password.$invalid) && signupForm.password.$touched">Password must be between 5 and 15 characters</span>
-                    </div>
-                    <!-- name -->
-                    <div class="form-group">
-                        <input class="form-control" name="name" type="text" ng-model="name" placeholder="Name" required>
-                        <span class="text-danger" ng-show="signupForm.name.$invalid && signupForm.name.$touched">This is required</span>
-                    </div>
-                    <!-- email -->
-                    <div class="form-group">
-                        <input class="form-control" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ng-model="email" placeholder="Email" required>
-                        <span class="text-danger" ng-show="signupForm.email.$invalid && signupForm.email.$touched">Should be like example@ex.com</span>
-                    </div>
-                    <!-- sign up button -->
-                    <div class="form-group text-center">
-                        <button class="btn btn-primary" ng-click="signupButton()">SIGN UP</button>
-                    </div>
-                </form>
+        <div class="auth">
+            <div class="nav-auth" role="navigation">
+                <!-- navigation -->
+                <ul class="nav nav-tabs">
+                    <li role="presentation" id="logIn" class="active"><a ng-click='changeForm()' role="tab" data-toggle="tab">LOG IN</a></li>
+                    <li role="presentation" id="signUp"><a ng-click='changeForm()' role="tab" data-toggle="tab">SIGN UP</a></li>
+                </ul>
+                <!-- forms -->
+                <div>
+
+                    <span class="text-danger" ng-show="invalidLogin">Username or Password may be invalid</span>
+
+                    <!-- login form -->
+                    <form ng-show="toggle" name="loginForm">
+
+                        <!-- username -->
+                        <div class="form-group">
+                            <input class="form-control" name="username" type="text" ng-model="username" placeholder="Username" required>
+                            <span class="text-danger" ng-show="loginForm.username.$invalid && loginForm.username.$touched">This is required</span>
+                        </div>
+                        <!-- password -->
+                        <div class="form-group">
+                            <input class="form-control" name="password" type="password" ng-model="password" placeholder="Password" required>
+                            <span class="text-danger" ng-show="loginForm.password.$invalid && loginForm.password.$touched">This is required</span>
+                        </div>
+                        <!-- login button -->
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary" ng-click="loginButton()">LOG IN</button>
+                        </div>
+                    </form>
+
+                    <!-- sign up form -->
+                    <form ng-hide="toggle" name="signupForm">
+                        <span class="text-danger text-center form-group" ng-show="unableSignup">Unable to Sign Up. Please try again.</span>
+                        <!-- username -->
+                        <div class="form-group">
+                            <input class="form-control" name="username" type="text" ng-model="username" placeholder="Username" required>
+                            <span class="text-danger" ng-show="signupForm.username.$invalid && signupForm.username.$touched">This is required</span>
+                            <span class="text-danger" ng-show="dupUsername">Username already in use</span>
+                        </div>
+                        <!-- password -->
+                        <div class="form-group">
+                            <input class="form-control" name="password" type="password" ng-model="password" placeholder="Password" required>
+                            <span class="text-danger" ng-show="(password.length < 5 || password.length > 15 || signupForm.password.$invalid) && signupForm.password.$touched">Password must be between 5 and 15 characters</span>
+                        </div>
+                        <!-- name -->
+                        <div class="form-group">
+                            <input class="form-control" name="name" type="text" ng-model="name" placeholder="Name" required>
+                            <span class="text-danger" ng-show="signupForm.name.$invalid && signupForm.name.$touched">This is required</span>
+                        </div>
+                        <!-- email -->
+                        <div class="form-group">
+                            <input class="form-control" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ng-model="email" placeholder="Email" required>
+                            <span class="text-danger" ng-show="signupForm.email.$invalid && signupForm.email.$touched">Should be like example@ex.com</span>
+                        </div>
+                        <!-- sign up button -->
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary" ng-click="signupButton()">SIGN UP</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- log in with social media account -->
+            <div class="social">
+                <div  style="padding: 5%; font-size: 30px; color: white;" class="text-center socialDescription">Login with your social account</div>
+
+                <!-- google sign in -->
+                <button class="btn btn-default" id="gSignInBtn" style="margin: 10%" ng-click="signIn()">Sign In</button>
             </div>
         </div>
 
-        <!-- log in with social media account -->
-        <div class="social">
-            <div  style="padding: 5%; font-size: 30px; color: white;" class="text-center socialDescription">Login with your social account</div>
-
-            <!-- google sign in -->
-            <button class="btn btn-default" id="gSignInBtn" style="margin: 10%" onclick="signIn()">Sign In</button>
-        </div>
     </div>
 
 </div>
 
 <script>
 
+    // initializing google auth2 api
     gapi.load('auth2', function () {
         gapi.auth2.init();
     });
 
-    function signIn() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signIn().then(function () {
-            console.log('User signed in.');
-            document.getElementById('gSignInBtn').innerHTML = 'Sign Out';
-            document.getElementById('gSignInBtn').onclick = signOut();
-        });
-    }
-
-    function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-            console.log('User signed out.');
-            document.getElementById('gSignInBtn').innerHTML = 'Sign In';
-            document.getElementById('gSignInBtn').onclick = signIn();
-        });
-    }
+    //    function signOut() {
+//        var auth2 = gapi.auth2.getAuthInstance();
+//        auth2.signOut().then(function () {
+//            console.log('User signed out.');
+//            document.getElementById('gSignInBtn').innerHTML = 'Sign In';
+//            $('#gSignInBtn').attr('onClick','signIn()');
+//        });
+//    }
 
 </script>

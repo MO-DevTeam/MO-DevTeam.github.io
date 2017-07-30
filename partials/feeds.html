@@ -2,14 +2,14 @@
 
 <!-- side nav -->
 <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a class="closebtn" onclick="closeNav()">&times;</a>
     <a ng-repeat="x in tags" ui-sref="tags({ id: '{{x}}'})">{{x}}</a>
 </div>
 
 <!-- content area -->
 <div id="main">
     <!-- open side nav -->
-    <span id="open" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Tags</span>
+    <span id="open" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 
     <!-- feeds -->
     <div class="col s12 m7" ng-repeat="x in feeds">
@@ -42,7 +42,7 @@
 </div>
 
 
-<!-- open and close side nav -->
+ <!--open and close side nav-->
 <script>
     var openNav = function () {
         document.getElementById("mySidenav").style.width = "250px";

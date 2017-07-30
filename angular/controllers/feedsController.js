@@ -28,7 +28,9 @@ var feedsController = function ($scope, $state, $http) {
     $scope.removeTag = function (tag) {
         $scope.tagRefine.push(tag);
         $scope.addedTags.splice($scope.addedTags.indexOf(tag), 1);
-    }
+    };
+
+
 
 };
 

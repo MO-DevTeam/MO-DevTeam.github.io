@@ -27,3 +27,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
+// snackbar
+var snackbar = function (str) {
+    var x = document.getElementById("snackbar");
+    x.innerHTML = str;
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+};

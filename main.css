@@ -1,12 +1,16 @@
 
 
+body{
+
+    font-family: 'Ubuntu', sans-serif;
+}
+
 /* navbar*/
 .navbar-brand{
     color: rgba(255,255,255,0.75);
     font-size: x-large;
     display: flex
 }
-
 
 
 
@@ -25,6 +29,7 @@
 
 /* App description*/
 #description{
+    font-size: 28px;
     margin: 1% 0 2% 0;
     width: 100%;
 }
@@ -49,6 +54,10 @@
     cursor: pointer;
 }
 
+.nav {
+    margin-bottom: 2%;
+}
+
     /* input fields */
 .form-group {
     margin: 4% 0 2% 0;
@@ -69,7 +78,7 @@
 
 
 /* Side Navigation */
-.sidenav {
+.sidenav{
     height: 100%;
     width: 0;
     position: fixed;
@@ -116,4 +125,49 @@
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px; }
     .sidenav a {font-size: 18px;}
+}
+
+
+
+/* snackbar */
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+}
+
+#snackbar.show {
+    visibility: visible;
+
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }

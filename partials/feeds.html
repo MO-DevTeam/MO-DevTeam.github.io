@@ -3,40 +3,61 @@
 <!-- side nav -->
 <div id="mySidenav" class="sidenav">
     <a class="closebtn" onclick="closeNav()">&times;</a>
+
     <a ng-repeat="x in tags" ui-sref="tags({ id: '{{x}}'})">{{x}}</a>
 </div>
 
 <!-- content area -->
 <div id="main">
     <!-- open side nav -->
-    <span id="open" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    <span id="open" style="font-size:30px;cursor:pointer; margin-bottom: 100px" onclick="openNav()">&#9776;</span>
 
     <!-- feeds -->
-    <div class="col s12 m7" ng-repeat="x in feeds">
+    <div class="col s12 m7" ng-repeat="x in feeds" style="margin-top: 20px">
 
-        <div>
-            <div>
-                <div>
-                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+
+
+        <!--<div class="card">-->
+            <!--<div>-->
+                        <!--<p>I am a very simple card. I am good at containing small bits of information.</p>-->
+                    <!--</div>-->
+                    <!--<div class="dropdown">-->
+                        <!--<div class="input-group dropdown-toggle" data-toggle="dropdown">-->
+                            <!--<div class="input-group-addon" ng-repeat="k in addedTags">-->
+                                <!--<span>{{k}}</span>-->
+                                <!--<span class="glyphicon glyphicon-remove" ng-click="removeTag(k)"></span>-->
+                            <!--</div>-->
+
+                            <!--<input id="tagInput" class="form-control" type="text" ng-model="searchTag">-->
+                        <!--</div>-->
+                        <!--<ul class="dropdown-menu" ng-show="searchTag.length">-->
+                            <!--<li ng-repeat="n in tagRefine | filter: searchTag"><a ng-click="addTag(n)">{{n}}</a></li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<a href="#">This is a link</a>-->
+                    <!--</div>-->
+        <!--</div>-->
+
+        <div class="feed">
+            <div class="upvote">
+            </div>
+            <div class="feedDetails">
+                <div class="title">
+                    {{x.title}}
                 </div>
-                <div class="dropdown">
-                    <div class="input-group dropdown-toggle" data-toggle="dropdown">
-                        <div class="input-group-addon" ng-repeat="k in addedTags">
-                            <span>{{k}}</span>
-                            <span class="glyphicon glyphicon-remove" ng-click="removeTag(k)"></span>
-                        </div>
-
-                        <input id="tagInput" class="form-control" type="text" ng-model="searchTag">
+                <div class="tagChips">
+                    <div class="tag" ng-repeat="t in x.tags">
+                        {{t}}
                     </div>
-                    <ul class="dropdown-menu" ng-show="searchTag.length">
-                        <li ng-repeat="n in tagRefine | filter: searchTag"><a ng-click="addTag(n)">{{n}}</a></li>
-                    </ul>
                 </div>
-                <div>
-                    <a href="#">This is a link</a>
+                <div class="hr"></div>
+                <div class="author">
+                    {{x.author}}
                 </div>
             </div>
         </div>
+
     </div>
 
 </div>

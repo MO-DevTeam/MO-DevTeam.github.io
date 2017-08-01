@@ -27,6 +27,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
+
+
 // snackbar
 var snackbar = function (str) {
     var x = document.getElementById("snackbar");

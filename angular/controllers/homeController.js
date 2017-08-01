@@ -9,6 +9,7 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
     // switching between signUp and logIn forms
     $scope.toggle = true;
 
+    // <!--open and close side nav-->
     $scope.openNav = function () {
         document.getElementById("mySidenav").style.width = "250px";
         document.getElementById("main").style.marginLeft = "350px";
@@ -23,11 +24,20 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         $('#open').css('cursor','pointer');
     };
 
+    $scope.openSubInfo = function () {
+        $(".subUserInfo").css('height', '90px');
+        $(".caret").addClass("rotate");
+    };
 
+    // access user data
     var userDetails = authStorageAccess.getData('userDetails');
-
+    // check if logged in
     if(userDetails){
         $scope.switch = $scope.switch === false;
+        console.log(userDetails);
+        $scope.identity = userDetails.name;
+        $scope.uName = userDetails.username;
+        $scope.mail = userDetails.email;
     }
 
     var clearForm = function () {
@@ -60,7 +70,7 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
             var loginData = {
                 "password": $scope.password
             };
-            var loginUrl = "https://localhost:3000/api/users/" + $scope.username;
+            var loginUrl = "http://localhost:3000/api/users/" + $scope.username;
             $http({
                 method: 'POST',
                 url: loginUrl,
@@ -107,7 +117,7 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
                 "email": $scope.email,
                 "name": $scope.name
             };
-            var signupUrl = "https://localhost:3000/api/users";
+            var signupUrl = "http://localhost:3000/api/users";
             $http({
                 method: 'POST',
                 url: signupUrl,
@@ -129,6 +139,19 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         }
     };
 
+    $scope.gUrl = 'images/google-btn-light.png';
+
+    // initializing google auth2 api
+    try {
+        gapi.load('auth2', function () {
+            gapi.auth2.init();
+        });
+    }
+    catch(err) {
+        snackbar("Unable to load Google API. Please Refresh");
+        $scope.gUrl = "images/btn_google_signin_light_disabled_web.png";
+        $("#gSignInBtn").css("background-color", "white");
+    }
 
      // google sign in
      $scope.signIn = function() {
@@ -141,8 +164,17 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         });
     };
 
+    $('#MainProfileInfo').mouseenter(function () {
+        $('#mainUserInfo').css('color','white')
+    });
+    $('#MainProfileInfo').mouseleave(function () {
+        $('#mainUserInfo').css('color','dimgrey')
+    });
+
+
 
 };
 
 angular.module('myApp').controller('homeController', homeController);
+
 

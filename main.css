@@ -123,10 +123,94 @@ body{
 
 /* responsive */
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px; }
-    .sidenav a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
 }
 
+
+
+
+
+#MainProfileInfo{
+
+}
+
+
+
+#profileImg, #mainUserInfo{
+    padding: 3%;
+    margin: 3%;
+    transition: color .3s ease-out;
+}
+
+.subUserInfo {
+    background-color: #484848;
+    font-size: 20px;
+    padding: 0;
+    height: 0;
+    transition: height .3s ease-out;
+}
+
+.caret {
+    transition: transform .3s ease-out;
+}
+
+.rotate {
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+
+.feed {
+    display: flex;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.feed:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.feedDetails {
+    width: 100%;
+}
+
+.title {
+    font-weight: bold;
+    padding: 1%;
+}
+
+.tagChips {
+    display: flex;
+    margin-left: .5%;
+}
+
+.tag {
+    display: flex;
+    background-color: #02b3e4;
+    border-radius: 2px;
+    margin: .5% .5% 1% .5%;
+    padding: .5% 1% .5% 1%;
+    color: white;
+    word-wrap: break-word;
+}
+
+.author {
+    padding: 1% 1% 1% 1%;
+}
+
+.hr {
+    width: 100%;
+    height: 1px;
+    background-color: #e5e5e5;
+}
 
 
 /* snackbar */

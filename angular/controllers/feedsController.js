@@ -6,30 +6,49 @@ var feedsController = function ($scope, $state, $http) {
 
     // tags
     $scope.tags = ['General', 'Technology', 'Sports'];
-
-    // feeda
-    $scope.feeds = ["abc"];
+    $scope.feeds = [{
+        "title": "abcdefg",
+        "tags": ["abdawsd", "casdd", "efdasd"],
+        "author": "hello"
+    }];
 
     // tags for search
-    $scope.tagRefine = ['General', 'Technology', 'Sports'];
+    // $scope.tagRefine = ['General', 'Technology', 'Sports'];
     // added tags
-    $scope.addedTags = [];
+    // $scope.addedTags = [];
 
     // add Tag
-    $scope.addTag = function (tag) {
+    // $scope.addTag = function (tag) {
+    //
+    //     $scope.addedTags.push(tag);
+    //     $scope.tagRefine.splice($scope.tagRefine.indexOf(tag), 1);
+    //     document.getElementById("tagInput").value = "";
+    //     $scope.searchTag = "";
+    // };
+    //
+    // // remove Tag
+    // $scope.removeTag = function (tag) {
+    //     $scope.tagRefine.push(tag);
+    //     $scope.addedTags.splice($scope.addedTags.indexOf(tag), 1);
+    // };
 
-        $scope.addedTags.push(tag);
-        $scope.tagRefine.splice($scope.tagRefine.indexOf(tag), 1);
-        document.getElementById("tagInput").value = "";
-        $scope.searchTag = "";
-    };
+    $http(
+        {
+            method: "GET",
+            url: "http://localhost:3000/api/feeds"
+        }
+    ).then(
+        function successCallback(response) {
+            if (response.data.indexOf("Error") !== -1){
+                snackbar("A problem has occurred. Please try again.");
+                $state.reload();
+            }
+            else {
+                $scope.feeds = response.data;
 
-    // remove Tag
-    $scope.removeTag = function (tag) {
-        $scope.tagRefine.push(tag);
-        $scope.addedTags.splice($scope.addedTags.indexOf(tag), 1);
-    };
-
+            }
+        }
+    );
 
 
 };

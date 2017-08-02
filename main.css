@@ -3,6 +3,7 @@
 body{
 
     font-family: 'Ubuntu', sans-serif;
+    overflow-x: hidden;
 }
 
 /* navbar*/
@@ -136,16 +137,30 @@ body{
 
 
 
-#MainProfileInfo{
 
-}
-
-
-
-#profileImg, #mainUserInfo{
+.profileImg, #mainUserInfo{
     padding: 3%;
     margin: 3%;
     transition: color .3s ease-out;
+}
+
+#gSignInBtn {
+    margin: 10%;
+    width: 180px;
+    height: 46px;
+    cursor: pointer;
+}
+
+.signOut {
+    font-size: 20px;
+    width: 200px;
+    height: 30px;
+}
+
+.email, .uName{
+    font-size: 18px;
+    line-height: 30px;
+    color: whitesmoke;
 }
 
 .subUserInfo {
@@ -153,7 +168,8 @@ body{
     font-size: 20px;
     padding: 0;
     height: 0;
-    transition: height .3s ease-out;
+    transition: all .3s ease-out;
+    display: none;
 }
 
 .caret {
@@ -184,7 +200,8 @@ body{
 
 .title {
     font-weight: bold;
-    padding: 1%;
+    font-size: larger;
+    padding: 1.5% 1% 1% 1%;
 }
 
 .tagChips {
@@ -194,16 +211,17 @@ body{
 
 .tag {
     display: flex;
+    font-size: smaller;
     background-color: #02b3e4;
     border-radius: 2px;
-    margin: .5% .5% 1% .5%;
-    padding: .5% 1% .5% 1%;
+    margin: 5px 5px 10px 5px;
+    padding: 5px;
     color: white;
     word-wrap: break-word;
 }
 
 .author {
-    padding: 1% 1% 1% 1%;
+    padding: .5% 1% .5% 1%;
 }
 
 .hr {

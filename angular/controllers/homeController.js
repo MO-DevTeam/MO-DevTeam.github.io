@@ -4,6 +4,7 @@
 
 var homeController = function ($scope, $state, $http, authStorageAccess) {
 
+    //  logged in or not
     $scope.switch = false;
 
     // switching between signUp and logIn forms
@@ -24,10 +25,8 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         $('#open').css('cursor','pointer');
     };
 
-    $scope.openSubInfo = function () {
-        $(".subUserInfo").css('height', '90px');
-        $(".caret").addClass("rotate");
-    };
+
+
 
     // access user data
     var userDetails = authStorageAccess.getData('userDetails');
@@ -36,10 +35,18 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         $scope.switch = $scope.switch === false;
         console.log(userDetails);
         $scope.identity = userDetails.name;
-        $scope.uName = userDetails.username;
-        $scope.mail = userDetails.email;
+
+        if (userDetails.img){
+            $scope.imgLink = userDetails.img;
+        }
+        else {
+            $scope.imgLink = "images/userImage.png";
+        }
+
+
     }
 
+    // reset form
     var clearForm = function () {
         // reset form
         $scope.username = "";
@@ -54,6 +61,7 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         $scope.signupForm.email.$setUntouched();
     };
 
+    // change form
     $scope.changeForm = function() {
         clearForm();
         // toggle
@@ -64,13 +72,19 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
     $scope.unableSignup = false;
     $scope.dupUsername = false;
     $scope.invalidLogin = false;
-    
+
+
+    // login
     $scope.loginButton = function () {
+
+        // check form validation
         if ($scope.loginForm.$valid) {
             var loginData = {
                 "password": $scope.password
             };
             var loginUrl = "http://localhost:3000/api/users/" + $scope.username;
+
+            // POST request for login
             $http({
                 method: 'POST',
                 url: loginUrl,
@@ -88,6 +102,8 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
                         clearForm();
                     }
                     else {
+
+                        // get user details if logged in
                         $http(
                             {
                                 method: 'GET',
@@ -97,7 +113,6 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
                             function successCallback(response) {
                                 userDetails = response.data[0];
                                 authStorageAccess.setData("userDetails", userDetails);
-
                                 $state.reload();
                             }
                         )
@@ -109,6 +124,7 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         }
     };
 
+    // sign up
     $scope.signupButton = function () {
         if ($scope.signupForm.$valid) {
             var signupData = {
@@ -123,6 +139,8 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
                 url: signupUrl,
                 data: signupData
             }).then(
+
+                // get information from database
                 function successCallback(response) {
                     var data = response.data;
 
@@ -131,6 +149,7 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
                         clearForm();
                     }
                     else {
+                        userDetails = signupData;
                         authStorageAccess.setData("userDetails", userDetails);
                         $state.reload();
                     }
@@ -139,13 +158,16 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         }
     };
 
+    // profile img url
     $scope.gUrl = 'images/google-btn-light.png';
 
     // initializing google auth2 api
     try {
-        gapi.load('auth2', function () {
-            gapi.auth2.init();
-        });
+        if (!$scope.switch) {
+            gapi.load('auth2', function () {
+                gapi.auth2.init();
+            });
+        }
     }
     catch(err) {
         snackbar("Unable to load Google API. Please Refresh");
@@ -156,14 +178,29 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
      // google sign in
      $scope.signIn = function() {
         var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signIn().then(function () {
+
+        auth2.signIn().then(function (googleUser) {
+
+            var profile = googleUser.getBasicProfile();
+
+            var userDetails = {};
+
+            userDetails.name = profile.getName();
+            var email = profile.getEmail();
+            userDetails.email = email;
+            console.log(userDetails.email);
+            userDetails.username = email.slice(0, email.indexOf("@"));
+            userDetails.img = profile.getImageUrl();
+            authStorageAccess.setData("userDetails", userDetails);
+
             console.log('User signed in.');
-            $state.go('feeds');
-//            document.getElementById('gSignInBtn').innerHTML = 'Sign Out';
-//            $('#gSignInBtn').attr('onClick','signOut()');
+            $state.reload();
+
+
         });
     };
 
+    // hover effect on profile
     $('#MainProfileInfo').mouseenter(function () {
         $('#mainUserInfo').css('color','white')
     });

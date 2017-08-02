@@ -6,21 +6,18 @@
     <a class="closebtn" ng-click="closeNav()">&times;</a>
 
     <div id="MainProfileInfo" >
-        <div id="profileImg" class="text-center">
-            <img ng-src="images/userImage.png" class="img-circle" width="80" height="80">
+        <div class="profileImg text-center">
+            <img id="profileImg" ng-src={{imgLink}} class="img-circle" width="80" height="80">
         </div>
 
         <div id="mainUserInfo" ng-click="openSubInfo()" class="text-center" style="color: dimgrey; font-size: 22px">
             {{identity}}
-            <span class="caret"></span>
-        </div>
 
-        <div class="subUserInfo">
-            <div>{{uName}}</div>
-            <div><span class="small">Email:&nbsp</span>{{mail}}</div>
         </div>
 
     </div>
+
+
 
 </div>
 
@@ -104,7 +101,7 @@
                 <div  style="padding: 5%; font-size: 30px; color: white;" class="text-center socialDescription">Login with your social account</div>
 
                 <!-- google sign in -->
-                <img ng-src={{gUrl}} id="gSignInBtn" style="margin: 10%; width: 180px; height: 48px" ng-click="signIn()">
+                <img ng-src={{gUrl}} id="gSignInBtn" ng-click="signIn()">
             </div>
         </div>
 

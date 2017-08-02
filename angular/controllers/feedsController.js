@@ -2,7 +2,7 @@
  * Created by mahim on 28-07-2017.
  */
 
-var feedsController = function ($scope, $state, $http) {
+var feedsController = function ($scope, $state, $http, authStorageAccess) {
 
     // tags
     $scope.tags = ['General', 'Technology', 'Sports'];
@@ -11,6 +11,27 @@ var feedsController = function ($scope, $state, $http) {
         "tags": ["abdawsd", "casdd", "efdasd"],
         "author": "hello"
     }];
+
+    // access user data
+    var userDetails = authStorageAccess.getData('userDetails');
+    // check if logged in
+    if(userDetails){
+        console.log(userDetails);
+        $scope.identity = userDetails.name;
+
+        if (userDetails.img){
+            $scope.imgLink = userDetails.img;
+        }
+        else {
+            $scope.imgLink = "images/userImage.png";
+        }
+
+
+    }
+    else {
+        snackbar("Please Login to access this page");
+        $state.go("home");
+    }
 
     // tags for search
     // $scope.tagRefine = ['General', 'Technology', 'Sports'];
@@ -44,7 +65,7 @@ var feedsController = function ($scope, $state, $http) {
                 $state.reload();
             }
             else {
-                $scope.feeds = response.data;
+                // $scope.feeds = response.data;
 
             }
         }

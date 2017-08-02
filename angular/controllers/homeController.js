@@ -25,6 +25,10 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         $('#open').css('cursor','pointer');
     };
 
+    $scope.rotateCaret = function () {
+        $(".caret").addClass("rotate");
+    };
+
 
 
 
@@ -198,6 +202,17 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
 
 
         });
+    };
+
+    $scope.signOut = function () {
+        if (userDetails.img){
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+        authStorageAccess.setData("userDetails", "");
+        $state.reload();
     };
 
     // hover effect on profile

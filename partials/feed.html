@@ -1,0 +1,28 @@
+<!-- Feed page -->
+
+<!-- side nav -->
+<div id="mySidenav" class="sidenav">
+    <a class="closebtn" onclick="closeNav()">&times;</a>
+
+    <div id="MainProfileInfo" >
+        <div class="profileImg text-center">
+            <img id="profileImg" ng-src={{imgLink}} class="img-circle" width="80" height="80">
+        </div>
+
+        <div id="mainUserInfo" ng-click="openSubInfo()" class="text-center" style="color: dimgrey; font-size: 22px">
+            {{identity}}
+        </div>
+
+    </div>
+
+    <a ng-repeat="x in tags" ui-sref="tags({ id: '{{x}}'})">{{x}}</a>
+</div>
+
+<!-- content area -->
+<div id="main">
+    <!-- open side nav -->
+    <span id="open" style="font-size:30px;cursor:pointer; margin-bottom: 100px" onclick="openNav()">&#9776;</span>
+
+
+
+</div>

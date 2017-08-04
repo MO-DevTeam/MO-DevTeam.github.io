@@ -9,20 +9,28 @@
             <img id="profileImg" ng-src={{imgLink}} class="img-circle" width="80" height="80">
         </div>
 
-        <div id="mainUserInfo" ng-click="openSubInfo()" class="text-center" style="color: dimgrey; font-size: 22px">
-            {{identity}}
+        <div id="mainUserInfo" ng-click="openSubInfo()" class="text-center dropdown" style="color: dimgrey; font-size: 22px">
+            <div class="dropdown-toggle" data-toggle="dropdown" ng-click="rotateCaret()">
+                {{identity}}
+                <span class="caret"></span>
+            </div>
+            <ul style="width: 100%" class="dropdown-menu dropdown-menu-right">
+                <li ng-click="signOut()"><a class="text-center">Sign Out</a></li>
+            </ul>
         </div>
 
     </div>
 
-    <a ng-repeat="x in tags" ui-sref="tags({ id: '{{x}}'})">{{x}}</a>
+    <a ng-repeat="x in tags" ng-click="filterFeeds(x)">{{x}}</a>
 </div>
 
 <!-- content area -->
 <div id="main">
     <!-- open side nav -->
-    <span id="open" style="font-size:30px;cursor:pointer; margin-bottom: 100px" onclick="openNav()">&#9776;</span>
-
+    <div id="topDiv">
+        <span id="open" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776;</span>
+        <button class="btn btn-primary" ui-sref="new">New Feed</button>
+    </div>
     <!-- feeds -->
     <div class="col s12 m7" ng-repeat="x in feeds" style="margin-top: 20px">
 
@@ -50,9 +58,9 @@
                     <!--</div>-->
         <!--</div>-->
 
-        <div class="feed">
+        <div class="feed" ui-sref="feed({ id: '{{feedId}}'})">
             <div class="upvote">
-            </div>
+        </div>
             <div class="feedDetails">
                 <div class="title">
                     {{x.title}}

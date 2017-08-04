@@ -2,7 +2,9 @@
 
 body{
 
-    font-family: 'Ubuntu', sans-serif;
+    /*font-family: 'Ubuntu', sans-serif;*/
+    font-family: 'Merriweather', serif;
+
     overflow-x: hidden;
 }
 
@@ -58,7 +60,6 @@ body{
 .nav {
     margin-bottom: 2%;
 }
-
     /* input fields */
 .form-group {
     margin: 4% 0 2% 0;
@@ -72,10 +73,19 @@ body{
     flex-direction: column;
     background-image: url("images/social.jpeg");
 }
+    /* google button */
+#gSignInBtn {
+    margin: 10%;
+    width: 180px;
+    height: 46px;
+    cursor: pointer;
+}
 
 
-
-
+#topDiv{
+    display: flex;
+    justify-content: space-between;
+}
 
 
 /* Side Navigation */
@@ -84,7 +94,7 @@ body{
     width: 0;
     position: fixed;
     z-index: 1;
-    top: 51px;
+    top: 0;
     left: 0;
     background-color: #111;
     overflow-x: hidden;
@@ -137,58 +147,40 @@ body{
 
 
 
-
+/* profile */
 .profileImg, #mainUserInfo{
     padding: 3%;
     margin: 3%;
     transition: color .3s ease-out;
 }
-
-#gSignInBtn {
-    margin: 10%;
-    width: 180px;
-    height: 46px;
-    cursor: pointer;
-}
-
-.signOut {
-    font-size: 20px;
-    width: 200px;
-    height: 30px;
-}
-
-.email, .uName{
-    font-size: 18px;
-    line-height: 30px;
-    color: whitesmoke;
-}
-
-.subUserInfo {
-    background-color: #484848;
-    font-size: 20px;
-    padding: 0;
-    height: 0;
-    transition: all .3s ease-out;
-    display: none;
-}
-
+    /* sub user info */
 .caret {
     transition: transform .3s ease-out;
 }
-
 .rotate {
     -ms-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
 }
+.reset{
+    -ms-transform: unset;
+    -webkit-transform: unset;
+    transform: unset;
+}
 
 
-.feed {
+
+
+
+
+/* Feeds */
+.feed, .mFeed {
     display: flex;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
 }
+
 
 .feed:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -229,6 +221,13 @@ body{
     height: 1px;
     background-color: #e5e5e5;
 }
+
+
+
+
+
+
+
 
 
 /* snackbar */

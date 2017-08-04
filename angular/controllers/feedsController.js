@@ -5,12 +5,29 @@
 var feedsController = function ($scope, $state, $http, authStorageAccess) {
 
     // tags
-    $scope.tags = ['General', 'Technology', 'Sports'];
+    $scope.tags = ['All', 'General', 'Technology', 'Sports', 'Art'];
+
+    // feeds variable
     $scope.feeds = [{
         "title": "abcdefg",
-        "tags": ["abdawsd", "casdd", "efdasd"],
+        "tags": ["General", "casdd", "efdasd"],
+        "author": "hello"
+    }, {
+        "title": "fkhehbfkjhbe",
+        "tags": ["dcbksj", "Art", "efdasd"],
+        "author": "hello"
+    }, {
+        "title": "ydhasjkbcsb",
+        "tags": ["Art", "casdd", "efdasd"],
+        "author": "hello"
+    }, {
+        "title": "sipowajgfvfdvhd",
+        "tags": ["dkj", "casdd", "Sports"],
         "author": "hello"
     }];
+    $scope.feedsCopy = $scope.feeds.slice(0);
+
+    var rotate = true;
 
     // access user data
     var userDetails = authStorageAccess.getData('userDetails');
@@ -53,6 +70,21 @@ var feedsController = function ($scope, $state, $http, authStorageAccess) {
     //     $scope.addedTags.splice($scope.addedTags.indexOf(tag), 1);
     // };
 
+    // rotate caret
+    $scope.rotateCaret = function () {
+        if(rotate){
+            $(".caret").removeClass("reset");
+            $(".caret").addClass("rotate");
+            rotate = false;
+        }
+        else{
+            $(".caret").removeClass("rotate");
+            $(".caret").addClass("reset");
+            rotate = true;
+        }
+    };
+
+    // request all feeds
     $http(
         {
             method: "GET",
@@ -70,6 +102,53 @@ var feedsController = function ($scope, $state, $http, authStorageAccess) {
             }
         }
     );
+
+    // sign out
+    $scope.signOut = function () {
+        if (userDetails.img){
+            gapi.load('auth2', function () {
+                gapi.auth2.init();
+            });
+
+            try {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                });
+            }
+            catch (exp){
+                snackbar("An Error Occurred. Please Try Again");
+            }
+
+        }
+        authStorageAccess.setData("userDetails", "");
+        $state.go('home');
+    };
+
+    // hover effect on profile
+    $('#MainProfileInfo').mouseenter(function () {
+        $('#mainUserInfo').css('color','white')
+    });
+    $('#MainProfileInfo').mouseleave(function () {
+        $('#mainUserInfo').css('color','dimgrey')
+    });
+
+
+    // filter feeds by tag
+    $scope.filterFeeds  = function (tag) {
+        $scope.feeds = $scope.feedsCopy.slice(0);
+        if (tag !== "All"){
+            var len = $scope.feeds.length;
+            for (var i = 0; i < len; i++){
+                if ($scope.feeds[i].tags.indexOf(tag) === -1){
+                    $scope.feeds.splice(i, 1);
+                    i--;
+                    len--;
+                }
+            }
+        }
+    };
+
 
 
 };

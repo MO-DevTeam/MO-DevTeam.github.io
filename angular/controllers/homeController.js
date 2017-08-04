@@ -10,6 +10,8 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
     // switching between signUp and logIn forms
     $scope.toggle = true;
 
+    var rotate = true;
+
     // <!--open and close side nav-->
     $scope.openNav = function () {
         document.getElementById("mySidenav").style.width = "250px";
@@ -25,8 +27,20 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         $('#open').css('cursor','pointer');
     };
 
+    // rotate caret
     $scope.rotateCaret = function () {
-        $(".caret").addClass("rotate");
+
+        if(rotate){
+            $(".caret").removeClass("reset");
+            $(".caret").addClass("rotate");
+            rotate = false;
+        }
+        else{
+            $(".caret").removeClass("rotate");
+            $(".caret").addClass("reset");
+            rotate = true;
+        }
+
     };
 
 
@@ -66,10 +80,11 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
     };
 
     // change form
-    $scope.changeForm = function() {
-        clearForm();
-        // toggle
-        $scope.toggle = $scope.toggle === false;
+    $scope.showLoginForm = function () {
+        $scope.toggle = true;
+    };
+    $scope.showSignupForm = function () {
+        $scope.toggle = false;
     };
 
     // form validation
@@ -117,7 +132,7 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
                             function successCallback(response) {
                                 userDetails = response.data[0];
                                 authStorageAccess.setData("userDetails", userDetails);
-                                $state.reload();
+                                $state.go('feeds');
                             }
                         )
 
@@ -155,7 +170,7 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
                     else {
                         userDetails = signupData;
                         authStorageAccess.setData("userDetails", userDetails);
-                        $state.reload();
+                        $state.go('feeds');
                     }
                 }
             );
@@ -198,18 +213,24 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
             authStorageAccess.setData("userDetails", userDetails);
 
             console.log('User signed in.');
-            $state.reload();
+            $state.go('feeds');
 
 
         });
     };
 
+    // sign out
     $scope.signOut = function () {
         if (userDetails.img){
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
+            try {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                });
+            }
+            catch (exp){
+                snackbar("An Error Occurred. Please Try Again");
+            }
         }
         authStorageAccess.setData("userDetails", "");
         $state.reload();

@@ -26,6 +26,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/feed/:id',
         templateUrl: 'partials/feed.html',
         controller: 'feedController'
+    }).
+        state('newFeed', {
+        url: '/feeds/newFeed',
+        templateUrl: 'partials/newFeed.html',
+        controller: 'newFeedController'
+
     });
 
 

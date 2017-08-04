@@ -1,14 +1,10 @@
 /**
- * Created by mahim on 28-07-2017.
+ * Created by Admin on 04-Aug-17.
  */
 
-var feedsController = function ($scope, $state, $http, authStorageAccess) {
 
-    // tags
-    $scope.tags = ['All', 'Technology', 'Sports', 'Art', 'Food', 'Health', 'Gaming', 'Web', 'Android', 'iOS', 'Windows'];
+var newFeedController = function ($scope, $state, $http, authStorageAccess) {
 
-    // feeds variable
-    $scope.feeds = [];
 
     var rotate = true;
 
@@ -33,6 +29,26 @@ var feedsController = function ($scope, $state, $http, authStorageAccess) {
         $state.go("home");
     }
 
+    // tags for search
+    $scope.tagRefine = ['Technology', 'Sports', 'Art', 'Food', 'Health', 'Gaming', 'Web', 'Android', 'iOS', 'Windows'];
+    // added tags
+    $scope.addedTags = [];
+
+    // add Tag
+    $scope.addTag = function (tag) {
+
+        $scope.addedTags.push(tag);
+        $scope.tagRefine.splice($scope.tagRefine.indexOf(tag), 1);
+        document.getElementById("tagInput").value = "";
+        $scope.searchTag = "";
+    };
+
+    // remove Tag
+    $scope.removeTag = function (tag) {
+        $scope.tagRefine.push(tag);
+        $scope.addedTags.splice($scope.addedTags.indexOf(tag), 1);
+    };
+
     // rotate caret
     $scope.rotateCaret = function () {
         if(rotate){
@@ -47,24 +63,6 @@ var feedsController = function ($scope, $state, $http, authStorageAccess) {
         }
     };
 
-    // request all feeds
-    $http(
-        {
-            method: "GET",
-            url: "http://localhost:3000/api/feeds"
-        }
-    ).then(
-        function successCallback(response) {
-            if (response.data.indexOf("Error") !== -1){
-                snackbar("A problem has occurred. Please try again.");
-                $state.reload();
-            }
-            else {
-                $scope.feeds = response.data;
-                $scope.feedsCopy = $scope.feeds.slice(0);
-            }
-        }
-    );
 
     // sign out
     $scope.signOut = function () {
@@ -104,23 +102,37 @@ var feedsController = function ($scope, $state, $http, authStorageAccess) {
     });
 
 
-    // filter feeds by tag
-    $scope.filterFeeds  = function (tag) {
-        $scope.feeds = $scope.feedsCopy.slice(0);
-        if (tag !== "All"){
-            var len = $scope.feeds.length;
-            for (var i = 0; i < len; i++){
-                if ($scope.feeds[i].tags.indexOf(tag) === -1){
-                    $scope.feeds.splice(i, 1);
-                    i--;
-                    len--;
+    $scope.post = function () {
+
+        var feedData = {
+            "title": $scope.title,
+            "content": $scope.content,
+            "author": userDetails.username,
+            "tags": $scope.addedTags
+        };
+
+        $http(
+            {
+                method: 'POST',
+                url: "http://localhost:3000/api/feeds",
+                data: feedData
+            }
+        ).then(
+            function successCallback(response) {
+                var data = response.data;
+                if (data.indexOf("Error") !== -1){
+                    snackbar("A problem has occurred. Please try again.");
+                }
+                else {
+                    snackbar("Feed Added");
+                    $state.go('feeds');
                 }
             }
-        }
+        )
     };
 
 
 
 };
 
-angular.module('myApp').controller('feedsController', feedsController);
+angular.module('myApp').controller('newFeedController', newFeedController);

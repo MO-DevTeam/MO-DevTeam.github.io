@@ -21,7 +21,7 @@
 
     </div>
 
-    <a ng-repeat="x in tags" ng-click="filterFeeds(x)">{{x}}</a>
+    <a ng-repeat="x in tags" ng-click="filterFeeds(x)" style="font-size: medium">{{x}}</a>
 </div>
 
 <!-- content area -->
@@ -29,43 +29,17 @@
     <!-- open side nav -->
     <div id="topDiv">
         <span id="open" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776;</span>
-        <button class="btn btn-primary" ui-sref="new">New Feed</button>
+        <button class="btn btn-primary" ui-sref="newFeed">New Feed</button>
     </div>
     <!-- feeds -->
     <div class="col s12 m7" ng-repeat="x in feeds" style="margin-top: 20px">
 
-
-
-        <!--<div class="card">-->
-            <!--<div>-->
-                        <!--<p>I am a very simple card. I am good at containing small bits of information.</p>-->
-                    <!--</div>-->
-                    <!--<div class="dropdown">-->
-                        <!--<div class="input-group dropdown-toggle" data-toggle="dropdown">-->
-                            <!--<div class="input-group-addon" ng-repeat="k in addedTags">-->
-                                <!--<span>{{k}}</span>-->
-                                <!--<span class="glyphicon glyphicon-remove" ng-click="removeTag(k)"></span>-->
-                            <!--</div>-->
-
-                            <!--<input id="tagInput" class="form-control" type="text" ng-model="searchTag">-->
-                        <!--</div>-->
-                        <!--<ul class="dropdown-menu" ng-show="searchTag.length">-->
-                            <!--<li ng-repeat="n in tagRefine | filter: searchTag"><a ng-click="addTag(n)">{{n}}</a></li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                    <!--<div>-->
-                        <!--<a href="#">This is a link</a>-->
-                    <!--</div>-->
-        <!--</div>-->
-
-        <div class="feed" ui-sref="feed({ id: '{{feedId}}'})">
-            <div class="upvote">
-        </div>
+        <div class="feed" ui-sref="feed({ id: '{{x._id}}'})">
             <div class="feedDetails">
                 <div class="title">
                     {{x.title}}
                 </div>
-                <div class="tagChips">
+                <div class="tagChips" style="margin-left: .5%">
                     <div class="tag" ng-repeat="t in x.tags">
                         {{t}}
                     </div>

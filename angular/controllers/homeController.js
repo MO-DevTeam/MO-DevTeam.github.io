@@ -222,18 +222,30 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
     // sign out
     $scope.signOut = function () {
         if (userDetails.img){
+            gapi.load('auth2', function () {
+                gapi.auth2.init();
+            });
+
             try {
                 var auth2 = gapi.auth2.getAuthInstance();
                 auth2.signOut().then(function () {
                     console.log('User signed out.');
                 });
+                authStorageAccess.setData("userDetails", "");
+                $state.reload();
+                snackbar("Logged Out");
             }
             catch (exp){
                 snackbar("An Error Occurred. Please Try Again");
             }
+
         }
-        authStorageAccess.setData("userDetails", "");
-        $state.reload();
+        else {
+            authStorageAccess.setData("userDetails", "");
+            $state.reload();
+            snackbar("Logged Out");
+        }
+
     };
 
     // hover effect on profile

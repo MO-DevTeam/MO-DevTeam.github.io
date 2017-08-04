@@ -196,9 +196,15 @@ body{
     padding: 1.5% 1% 1% 1%;
 }
 
+.titleFeed {
+    font-weight: bold;
+    font-size: x-large;
+    padding: 2% 1% 1% 2%;
+}
+
 .tagChips {
     display: flex;
-    margin-left: .5%;
+    margin-left: 1.5%;
 }
 
 .tag {
@@ -212,7 +218,18 @@ body{
     word-wrap: break-word;
 }
 
+.tag2 {
+    display: flex;
+    font-size: smaller;
+    background-color: #02b3e4;
+    padding: 5px;
+    color: white;
+}
+
 .author {
+    font-weight: lighter;
+    font-size: small;
+    color: darkgray;
     padding: .5% 1% .5% 1%;
 }
 
@@ -222,10 +239,35 @@ body{
     background-color: #e5e5e5;
 }
 
+.content {
+    padding: .5% 1% 1% 2%;
+    font-size: medium;
+    white-space: pre-wrap
+}
 
+.upvote {
+    border: solid 2px dodgerblue;
+    border-radius: 4px;
+    display: flex;
+    margin: 16px 16px 16px 2%;
+}
 
+.upvoteCount {
+    background-color: dodgerblue;
+    text-align: center;
+    color: white;
+    padding: 8px 12px 8px 12px;
+}
 
-
+.upvoteBtn {
+    text-align: center;
+    padding: 8px 20px 8px 20px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    transition: background-color .2s ease-out;
+}
 
 
 

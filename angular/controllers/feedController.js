@@ -6,8 +6,23 @@ var feedController = function ($scope, $state, $http, $stateParams, authStorageA
 
     var rotate = true;
 
+    var upvoteActive = true;
+
+    // feeds variable
+    $scope.feed = {};
+
+    $scope.modUpvoteBtn = function () {
+        if(!upvoteActive){
+            $('.upvoteBtn').css({'background-color':'dodgerblue', 'color':'white'});
+        }
+        else{
+            $('.upvoteBtn').css({'background-color':'white', 'color':'black'});
+        }
+    };
+
     // access user data
     var userDetails = authStorageAccess.getData('userDetails');
+
     // check if logged in
     if(userDetails){
         console.log(userDetails);
@@ -27,6 +42,8 @@ var feedController = function ($scope, $state, $http, $stateParams, authStorageA
         $state.go("home");
     }
 
+
+
     // request for feed
     $http(
         {
@@ -36,16 +53,76 @@ var feedController = function ($scope, $state, $http, $stateParams, authStorageA
     ).then(
         function successCallback(response) {
             var data = response.data;
-            if (response.data.indexOf("Error") !== -1){
+            if (data.indexOf("Error") !== -1){
                 snackbar("A problem has occurred. Please try again.");
                 $state.reload();
             }
             else {
-                $scope.feed = data;
-
+                $scope.feed = data[0];
+                if($scope.feed.upvotes.indexOf(userDetails.username) !== -1){
+                    upvoteActive = false;
+                }
+                $scope.modUpvoteBtn();
             }
         }
     );
+
+    $scope.upvote = function () {
+
+        if(upvoteActive){
+            upvoteActive = false;
+            $scope.modUpvoteBtn();
+            $http(
+                {
+                    method: 'POST',
+                    url: "http://localhost:3000/api/feeds/upvote/" + $stateParams.id,
+                    data:{
+                        'user': userDetails.username
+                    }
+                }
+            ).then(
+                function successCallback(response){
+
+                    var data = response.data;
+                    if (data.indexOf("Error") !== -1){
+                        snackbar("A problem has occurred. Please try again.");
+                        upvoteActive = true;
+                        $scope.modUpvoteBtn();
+
+                    }
+                    else {
+                        $scope.feed.upvotes.push(userDetails.username);
+                    }
+            })
+        }
+        else {
+            upvoteActive = true;
+            $scope.modUpvoteBtn();
+            $http(
+                {
+                    method: 'POST',
+                    url: "http://localhost:3000/api/feeds/downvote/" + $stateParams.id,
+                    data:{
+                        'user': userDetails.username
+                    }
+                }
+            ).then(
+                function successCallback(response){
+
+                    var data = response.data;
+                    if (data.indexOf("Error") !== -1){
+                        snackbar("A problem has occurred. Please try again.");
+                        upvoteActive = false;
+                        $scope.modUpvoteBtn();
+
+                    }
+                    else {
+                        $scope.feed.upvotes.splice($scope.feed.upvotes.indexOf(userDetails.username), 1);
+                    }
+                })
+        }
+    };
+
 
     // sign out
     $scope.signOut = function () {
@@ -53,18 +130,27 @@ var feedController = function ($scope, $state, $http, $stateParams, authStorageA
             gapi.load('auth2', function () {
                 gapi.auth2.init();
             });
+
             try {
                 var auth2 = gapi.auth2.getAuthInstance();
                 auth2.signOut().then(function () {
                     console.log('User signed out.');
                 });
+                authStorageAccess.setData("userDetails", "");
+                $state.go('home');
+                snackbar("Logged Out");
             }
             catch (exp){
                 snackbar("An Error Occurred. Please Try Again");
             }
+
         }
-        authStorageAccess.setData("userDetails", "");
-        $state.go('home');
+        else {
+            authStorageAccess.setData("userDetails", "");
+            $state.go('home');
+            snackbar("Logged Out");
+        }
+
     };
 
     // rotate caret

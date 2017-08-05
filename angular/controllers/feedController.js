@@ -11,6 +11,8 @@ var feedController = function ($scope, $state, $http, $stateParams, authStorageA
     // feeds variable
     $scope.feed = {};
 
+
+
     $scope.modUpvoteBtn = function () {
         if(!upvoteActive){
             $('.upvoteBtn').css({'background-color':'dodgerblue', 'color':'white'});
@@ -63,9 +65,39 @@ var feedController = function ($scope, $state, $http, $stateParams, authStorageA
                     upvoteActive = false;
                 }
                 $scope.modUpvoteBtn();
+                console.log($scope.feed);
             }
         }
     );
+
+    $scope.commentBtn = function () {
+        var comment2 = {
+            "comment": $scope.commentInput,
+            "author": userDetails.username,
+            "img": (userDetails.img)?(userDetails.img):null
+        };
+        $scope.feed.comments.push(comment2);
+        $http(
+            {
+                method: "POST",
+                url: "http://localhost:3000/api/feeds/comment/" + $stateParams.id,
+                data: comment2
+            }
+        ).then(
+            function successCallback(response) {
+                var data = response.data;
+                if (data.indexOf("Error") !== -1){
+                    snackbar("A problem has occurred. Please try again.");
+                    $scope.feed.comment().splice($scope.feed.indexOf(comment2), 1);
+                }
+                else {
+                    $scope.commentInput = null;
+                }
+
+            }
+        )
+
+    };
 
     $scope.upvote = function () {
 
@@ -166,6 +198,16 @@ var feedController = function ($scope, $state, $http, $stateParams, authStorageA
             rotate = true;
         }
     };
+
+    $scope.setImage = function (comment) {
+        if (comment.img){
+            return comment.img;
+        }
+        else {
+            return "images/userImage.png"
+        }
+    }
+
 
 };
 

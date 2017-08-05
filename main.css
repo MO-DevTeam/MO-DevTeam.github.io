@@ -249,7 +249,7 @@ body{
     border: solid 2px dodgerblue;
     border-radius: 4px;
     display: flex;
-    margin: 16px 16px 16px 2%;
+    margin: 8px 16px 8px 2%;
 }
 
 .upvoteCount {
@@ -269,7 +269,18 @@ body{
     transition: background-color .2s ease-out;
 }
 
+.makeComment {
+    display: flex;
+}
 
+.commentText {
+    padding: 1% 2% 1% 0;
+    width: 90%;
+}
+
+.comments{
+    transition: all .3s ease-out;
+}
 
 
 /* snackbar */

@@ -77,18 +77,21 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
         $scope.signupForm.name.$setUntouched();
         $scope.email = "";
         $scope.signupForm.email.$setUntouched();
+        $scope.dupUsername = false;
+        $scope.invalidLogin = false;
     };
 
     // change form
     $scope.showLoginForm = function () {
         $scope.toggle = true;
+        clearForm();
     };
     $scope.showSignupForm = function () {
         $scope.toggle = false;
+        clearForm();
     };
 
     // form validation
-    $scope.unableSignup = false;
     $scope.dupUsername = false;
     $scope.invalidLogin = false;
 
@@ -165,7 +168,13 @@ var homeController = function ($scope, $state, $http, authStorageAccess) {
 
                     if (data.indexOf("DB Error") !== -1){
                         snackbar("A problem has occurred. Please try again.");
+                        $scope.dupUsername = false;
                         clearForm();
+                    }
+                    else if (data.indexOf("unique") !== -1){
+                        $scope.dupUsername = true;
+                        $scope.password = "";
+                        $scope.signupForm.password.$setUntouched();
                     }
                     else {
                         userDetails = signupData;
